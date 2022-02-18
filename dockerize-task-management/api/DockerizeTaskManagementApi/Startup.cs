@@ -1,3 +1,4 @@
+using DockerizeTaskManagementApi.AppCode.Configuration;
 using DockerizeTaskManagementApi.Models.DataContext;
 using DockerizeTaskManagementApi.Models.DataContexts;
 using MediatR;
@@ -56,6 +57,11 @@ namespace DockerizeTaskManagementApi
                 }
             });
 
+
+            CorsConfiguration.AddCors(services);
+            SwaggerConfiguration.AddSwagger(services);
+            JwtConfiguration.AddJwt(services, configuration);
+
             services.AddMediatR(typeof(Program).Assembly);
         }
 
@@ -67,6 +73,10 @@ namespace DockerizeTaskManagementApi
             }
 
             app.SeedMembership();
+
+            CorsConfiguration.UseCors(app);
+            SwaggerConfiguration.UseSwagger(app);
+            JwtConfiguration.UseJwt(app);
 
             app.UseRouting();
 
