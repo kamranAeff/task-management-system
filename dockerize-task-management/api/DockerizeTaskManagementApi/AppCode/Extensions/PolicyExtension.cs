@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Infrastructure;
+﻿using DockerizeTaskManagementApi.AppCode.Providers;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System;
 using System.Linq;
 using System.Security.Claims;
@@ -26,6 +27,16 @@ namespace DockerizeTaskManagementApi.AppCode.Extensions
         {
             var idData = ctx.ActionContext.HttpContext.User
                 .Claims.FirstOrDefault(c => c.Type.Equals(ClaimTypes.NameIdentifier))?.Value;
+
+            if (idData == null)
+                return null;
+
+            return Convert.ToInt32(idData);
+        }
+        static public int? GetOrganisationId(this IActionContextAccessor ctx)
+        {
+            var idData = ctx.ActionContext.HttpContext.User
+                .Claims.FirstOrDefault(c => c.Type.Equals(AppClaimProvider.OrganisationId))?.Value;
 
             if (idData == null)
                 return null;

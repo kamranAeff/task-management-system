@@ -11,6 +11,9 @@ namespace DockerizeTaskManagementApi.AppCode.Providers
 {
     public class AppClaimProvider : IClaimsTransformation
     {
+        public const string OrganisationId = "DockerizeTaskManagementApi.AppCode.Providers.OrganisationId";
+
+
         readonly TaskManagementDbContext db;
         public AppClaimProvider(TaskManagementDbContext db)
         {
@@ -63,6 +66,11 @@ namespace DockerizeTaskManagementApi.AppCode.Providers
                 else
                 {
                     claimIdentity.AddClaim(new Claim("FullName", $"{currentUser.Email}"));
+                }
+
+                if (currentUser.OrganisationId.HasValue)
+                {
+                    claimIdentity.AddClaim(new Claim(OrganisationId, currentUser.OrganisationId.ToString()));
                 }
             }
 

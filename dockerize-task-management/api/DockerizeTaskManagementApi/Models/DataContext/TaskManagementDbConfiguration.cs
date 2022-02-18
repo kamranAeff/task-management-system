@@ -1,4 +1,5 @@
-﻿using DockerizeTaskManagementApi.Models.Entities.Membership;
+﻿using DockerizeTaskManagementApi.Models.Entities;
+using DockerizeTaskManagementApi.Models.Entities.Membership;
 using Microsoft.EntityFrameworkCore;
 
 namespace DockerizeTaskManagementApi.Models.DataContexts
@@ -23,6 +24,22 @@ namespace DockerizeTaskManagementApi.Models.DataContexts
 
             modelBuilder.Entity<AppUserToken>(e => e.ToTable("UserTokens", "Membership"));
             modelBuilder.Entity<AppUserLogin>(e => e.ToTable("UserLogins", "Membership"));
+
+            modelBuilder.Entity<TaskItemUserCollection>(e =>
+            {
+                e.HasKey(k => new { k.TaskItemId, k.UserId });
+
+                e.HasOne(p => p.TaskItem)
+                .WithMany(p => p.MappedUsers)
+                .HasForeignKey(p => p.TaskItemId);
+
+
+                e.HasOne(p => p.User)
+                .WithMany(p => p.MappedTaskItems)
+                .HasForeignKey(p => p.UserId);
+
+                e.ToTable("TaskItemUserCollection");
+            });
         }
 
         internal static void ConfigurePostgreSql(ModelBuilder modelBuilder)

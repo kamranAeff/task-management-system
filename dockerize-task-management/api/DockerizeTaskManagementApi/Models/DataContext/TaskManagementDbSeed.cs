@@ -14,6 +14,7 @@ namespace DockerizeTaskManagementApi.Models.DataContext
             using (var scope = builder.ApplicationServices.CreateScope())
             {
                 var db = scope.ServiceProvider.GetRequiredService<TaskManagementDbContext>();
+
                 var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
 
                 string adminEmail = configuration["jwt:adminEmail"];
@@ -30,6 +31,7 @@ namespace DockerizeTaskManagementApi.Models.DataContext
                 {
                     role = new AppRole
                     {
+                        Rank = 1,
                         Name = superAdminRoleName
                     };
 
@@ -55,6 +57,32 @@ namespace DockerizeTaskManagementApi.Models.DataContext
                     {
                         userManager.AddToRoleAsync(adminUser, superAdminRoleName).Wait();
                     }
+                }
+
+                role = roleManager.FindByNameAsync("OrganisationAdmin").Result;
+
+                if (role == null)
+                {
+                    role = new AppRole
+                    {
+                        Rank = 2,
+                        Name = "OrganisationAdmin"
+                    };
+
+                    roleManager.CreateAsync(role).Wait();
+                }
+
+                role = roleManager.FindByNameAsync("User").Result;
+
+                if (role == null)
+                {
+                    role = new AppRole
+                    {
+                        Rank = 3,
+                        Name = "User"
+                    };
+
+                    roleManager.CreateAsync(role).Wait();
                 }
             }
 

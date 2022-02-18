@@ -4,14 +4,16 @@ using DockerizeTaskManagementApi.Models.DataContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DockerizeTaskManagementApi.Migrations
 {
     [DbContext(typeof(TaskManagementDbContext))]
-    partial class TaskManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220218152242_OrganisationEntityCreated")]
+    partial class OrganisationEntityCreated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,89 +256,6 @@ namespace DockerizeTaskManagementApi.Migrations
                     b.ToTable("Organisations");
                 });
 
-            modelBuilder.Entity("DockerizeTaskManagementApi.Models.Entities.TaskBoard", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CreatedByUserId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("OrganisationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedByUserId");
-
-                    b.HasIndex("OrganisationId");
-
-                    b.ToTable("Boards");
-                });
-
-            modelBuilder.Entity("DockerizeTaskManagementApi.Models.Entities.TaskItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CreatedByUserId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Deadline")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TaskBoardId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedByUserId");
-
-                    b.HasIndex("TaskBoardId");
-
-                    b.ToTable("Tasks");
-                });
-
-            modelBuilder.Entity("DockerizeTaskManagementApi.Models.Entities.TaskItemUserCollection", b =>
-                {
-                    b.Property<int>("TaskItemId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TaskItemId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("TaskItemUserCollection");
-                });
-
             modelBuilder.Entity("DockerizeTaskManagementApi.Models.Entities.Membership.AppRoleClaim", b =>
                 {
                     b.HasOne("DockerizeTaskManagementApi.Models.Entities.Membership.AppRole", null)
@@ -399,86 +318,14 @@ namespace DockerizeTaskManagementApi.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DockerizeTaskManagementApi.Models.Entities.TaskBoard", b =>
-                {
-                    b.HasOne("DockerizeTaskManagementApi.Models.Entities.Membership.AppUser", "CreatedByUser")
-                        .WithMany()
-                        .HasForeignKey("CreatedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DockerizeTaskManagementApi.Models.Entities.Organisation", "Organisation")
-                        .WithMany()
-                        .HasForeignKey("OrganisationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CreatedByUser");
-
-                    b.Navigation("Organisation");
-                });
-
-            modelBuilder.Entity("DockerizeTaskManagementApi.Models.Entities.TaskItem", b =>
-                {
-                    b.HasOne("DockerizeTaskManagementApi.Models.Entities.Membership.AppUser", "CreatedByUser")
-                        .WithMany()
-                        .HasForeignKey("CreatedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DockerizeTaskManagementApi.Models.Entities.TaskBoard", "TaskBoard")
-                        .WithMany("Tasks")
-                        .HasForeignKey("TaskBoardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CreatedByUser");
-
-                    b.Navigation("TaskBoard");
-                });
-
-            modelBuilder.Entity("DockerizeTaskManagementApi.Models.Entities.TaskItemUserCollection", b =>
-                {
-                    b.HasOne("DockerizeTaskManagementApi.Models.Entities.TaskItem", "TaskItem")
-                        .WithMany("MappedUsers")
-                        .HasForeignKey("TaskItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DockerizeTaskManagementApi.Models.Entities.Membership.AppUser", "User")
-                        .WithMany("MappedTaskItems")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TaskItem");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("DockerizeTaskManagementApi.Models.Entities.Membership.AppRole", b =>
                 {
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("DockerizeTaskManagementApi.Models.Entities.Membership.AppUser", b =>
-                {
-                    b.Navigation("MappedTaskItems");
-                });
-
             modelBuilder.Entity("DockerizeTaskManagementApi.Models.Entities.Organisation", b =>
                 {
                     b.Navigation("Users");
-                });
-
-            modelBuilder.Entity("DockerizeTaskManagementApi.Models.Entities.TaskBoard", b =>
-                {
-                    b.Navigation("Tasks");
-                });
-
-            modelBuilder.Entity("DockerizeTaskManagementApi.Models.Entities.TaskItem", b =>
-                {
-                    b.Navigation("MappedUsers");
                 });
 #pragma warning restore 612, 618
         }

@@ -25,5 +25,24 @@ namespace DockerizeTaskManagementApi.Controllers
 
             return Ok(response);
         }
+
+        [Authorize(Roles = "SuperAdmin,OrganisationAdmin")]//temporary
+        [HttpPost("create-sigup-ticket")]
+        public async Task<IActionResult> SigupTicket(AccountCreateTicketCommand command)
+        {
+            var response = await mediator.Send(command);
+
+            return Ok(response);
+        }
+
+        [AllowAnonymous]//temporary
+        [HttpPost("complate-signup")]
+        public async Task<IActionResult> ComplateSignup(AccountComplateSignupCommand command)
+        {
+            //http://localhost:4200/complate-signup?token=Op4ie8%2F%2FodyibLbxY8LYwm9Zlz1Pe87PMJoB9JZfyQDkAxHPb%2Bg7wourreW%2BEEpFUoKQ0pFtr0M%3D
+            var response = await mediator.Send(command);
+
+            return Ok(response);
+        }
     }
 }

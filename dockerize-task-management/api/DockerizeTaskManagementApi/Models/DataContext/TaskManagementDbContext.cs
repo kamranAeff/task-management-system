@@ -1,4 +1,5 @@
-﻿using DockerizeTaskManagementApi.Models.Entities.Membership;
+﻿using DockerizeTaskManagementApi.Models.Entities;
+using DockerizeTaskManagementApi.Models.Entities.Membership;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,8 +10,10 @@ namespace DockerizeTaskManagementApi.Models.DataContexts
         public TaskManagementDbContext(DbContextOptions options)
             : base(options)
         {
-
         }
+        public DbSet<Organisation> Organisations { get; set; }
+        public DbSet<TaskBoard> Boards { get; set; }
+        public DbSet<TaskItem> Tasks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
