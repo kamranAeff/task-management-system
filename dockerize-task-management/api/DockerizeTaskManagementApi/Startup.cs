@@ -1,4 +1,6 @@
+using AutoMapper;
 using DockerizeTaskManagementApi.AppCode.Configuration;
+using DockerizeTaskManagementApi.AppCode.Infrastructure;
 using DockerizeTaskManagementApi.Models.DataContext;
 using DockerizeTaskManagementApi.Models.DataContexts;
 using MediatR;
@@ -6,11 +8,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using System.Linq;
+using System.Reflection;
 
 namespace DockerizeTaskManagementApi
 {
@@ -63,6 +68,29 @@ namespace DockerizeTaskManagementApi
             JwtConfiguration.AddJwt(services, configuration);
 
             services.AddMediatR(typeof(Program).Assembly);
+            services.AddAutoMapper(cfg =>
+            {
+                var provider = services.BuildServiceProvider();
+
+                var webHostEnvironment = provider.GetRequiredService<IWebHostEnvironment>();
+                var ctx = provider.GetRequiredService<IActionContextAccessor>();
+                var db = provider.GetRequiredService<TaskManagementDbContext>();
+
+                foreach (var profile in Assembly.GetExecutingAssembly().GetTypes()
+                .Where(t => typeof(Profile).IsAssignableFrom(t)))
+                {
+                    if (typeof(MapperProfile).IsAssignableFrom(profile))
+                    {
+                        var profileInstance = profile.GetConstructor(new[] { typeof(IWebHostEnvironment), typeof(IActionContextAccessor), typeof(IConfiguration), typeof(TaskManagementDbContext) })
+                        .Invoke(new object[] { webHostEnvironment, ctx, configuration, db });
+
+                        cfg.AddProfile(profileInstance as Profile);
+                        continue;
+                    }
+
+                    cfg.AddProfile(profile);
+                }
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

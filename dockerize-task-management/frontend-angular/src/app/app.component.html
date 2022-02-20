@@ -1,0 +1,5 @@
+<router-outlet *ngIf="accountService.loggedIn;else login"></router-outlet>
+
+<ng-template #login>
+    <app-login></app-login>
+</ng-template>

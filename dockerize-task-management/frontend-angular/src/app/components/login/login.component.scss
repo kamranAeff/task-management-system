@@ -1,0 +1,125 @@
+
+@import "../../../assets/scss/common/variables";
+
+%input {
+    outline: none;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    color: $colorWhite;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+.login-container {
+    min-width: 340px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    & > .login-overlay {
+        background-image: url(../../../assets/images/bg.jpg);
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        z-index: 1;
+        opacity: 0.6;
+    }
+
+    & > .login-area {
+        width: 400px;
+        margin-top: 60px;
+        padding: 40px;
+        background-color: rgba($colorDark, 0.8);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+        border-radius: 5px;
+        box-shadow: 0px 6px 7px 6px rgb(44 44 44 / 20%);
+
+        & > h1 {
+            display: flex;
+            align-items: center;
+
+            color: $colorWhite;
+            text-transform: uppercase;
+            font-weight: 500;
+            font-size: 2rem;
+            margin: 20px auto;
+            transition: 0.25s;
+
+            &:before {
+                content: "";
+                display: inline-block;
+                width: 20px;
+                height: 10px;
+                background-color: $colorNormal;
+                position: relative;
+                left: -20px;
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+            }
+
+            &::after {
+                content: "";
+                display: inline-block;
+                width: 20px;
+                height: 10px;
+                background-color: $colorNormal;
+                position: relative;
+                right: -20px;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+        }
+
+        & > .login-input {
+            @extend %input;
+            border: 2px solid $colorNormal;
+            padding: 14px 10px;
+            width: 250px;
+
+            &:focus {
+                width: 320px;
+                border-color: $colorFocus;
+            }
+        }
+
+        & > input[type="submit"] {
+            @extend %input;
+            border: 2px solid $colorFocus;
+            padding: 14px 34px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $colorFocus;
+            }
+            &:focus {
+                background-color: $colorFocus;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .login-container {
+        .login-area {
+            margin: 0;
+            width: 100%;
+            height: 100vh;
+            border-radius: 0;
+            background-color: $colorDark;
+        }
+    }
+}

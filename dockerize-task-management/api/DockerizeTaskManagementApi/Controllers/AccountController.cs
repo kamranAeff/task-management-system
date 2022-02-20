@@ -1,4 +1,7 @@
-﻿using DockerizeTaskManagementApi.AppCode.Modules.AccountModule;
+﻿using AutoMapper;
+using DockerizeTaskManagementApi.AppCode.Infrastructure;
+using DockerizeTaskManagementApi.AppCode.Modules.AccountModule;
+using DockerizeTaskManagementApi.AppCode.Modules.AccountModule.Mapper.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +14,12 @@ namespace DockerizeTaskManagementApi.Controllers
     public class AccountController : ControllerBase
     {
         readonly IMediator mediator;
+        readonly IMapper mapper;
 
-        public AccountController(IMediator mediator)
+        public AccountController(IMediator mediator, IMapper mapper)
         {
             this.mediator = mediator;
+            this.mapper = mapper;
         }
 
         [AllowAnonymous]
@@ -24,6 +29,12 @@ namespace DockerizeTaskManagementApi.Controllers
             var response = await mediator.Send(query);
 
             return Ok(response);
+        }
+
+        [HttpGet("check-token")]
+        public async Task<IActionResult> Check()
+        {
+            return Ok();
         }
 
         [Authorize(Roles = "SuperAdmin,OrganisationAdmin")]//temporary
@@ -39,10 +50,23 @@ namespace DockerizeTaskManagementApi.Controllers
         [HttpPost("complate-signup")]
         public async Task<IActionResult> ComplateSignup(AccountComplateSignupCommand command)
         {
-            //http://localhost:4200/complate-signup?token=Op4ie8%2F%2FodyibLbxY8LYwm9Zlz1Pe87PMJoB9JZfyQDkAxHPb%2Bg7wourreW%2BEEpFUoKQ0pFtr0M%3D
             var response = await mediator.Send(command);
 
             return Ok(response);
+        }
+
+        //[Authorize] set as default from startup
+        [HttpGet("account-info")]
+        public async Task<IActionResult> GetAccountInfo([FromRoute] AccountInfoQuery query)
+        {
+            var response = await mediator.Send(query);
+
+            if (response == null)
+                return NotFound();
+
+            var dtoResponse = mapper.Map<AccountInfoDto>(response);
+
+            return Ok(dtoResponse);
         }
     }
 }

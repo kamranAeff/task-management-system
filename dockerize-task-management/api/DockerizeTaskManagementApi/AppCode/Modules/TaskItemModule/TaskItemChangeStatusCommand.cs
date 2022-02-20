@@ -27,7 +27,7 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.TaskItemModule
             }
             public async Task<JsonResponse> Handle(TaskItemChangeStatusCommand request, CancellationToken cancellationToken)
             {
-                int currentUserId = ctx.GetPrincipalId().Value;
+                int currentUserId = ctx.GetPrincipalId();
                 int organisationId = ctx.GetOrganisationId().Value;
 
                 var existedTask = await db.Tasks

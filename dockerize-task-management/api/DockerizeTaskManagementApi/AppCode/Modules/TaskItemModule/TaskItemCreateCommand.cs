@@ -35,7 +35,7 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.TaskItemModule
             }
             public async Task<JsonResponse> Handle(TaskItemCreateCommand request, CancellationToken cancellationToken)
             {
-                int currentUserId = ctx.GetPrincipalId().Value;
+                int currentUserId = ctx.GetPrincipalId();
                 int organisationId = ctx.GetOrganisationId().Value;
 
                 var board = await db.Boards.FirstOrDefaultAsync(b => b.Id == request.BoardId && b.OrganisationId == organisationId, cancellationToken);

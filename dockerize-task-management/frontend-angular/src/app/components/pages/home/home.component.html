@@ -1,0 +1,18 @@
+<app-header [accountInfo]="accountService.accountDetails"></app-header>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-10 offset-1">
+      <div class="card mt-3 board" *ngFor="let board of boards">
+        <div class="card-header" [innerText]="board.title"></div>
+        <div class="card-body">
+          <p class="card-text" [innerText]="board.description"></p>
+          <a href="#" class="btn btn-primary">Yenisini yarat</a>
+          <ul class="list-group list-group-flush mt-3">
+            <app-task [task]="item" *ngFor="let item of board.tasks"></app-task>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

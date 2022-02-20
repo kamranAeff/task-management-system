@@ -1,0 +1,69 @@
+<header class="header-section">
+  <div class="top-nav">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7">
+          <nav class="main-menu">
+            <ul>
+              <li class="active">
+                <a href="./index.html">YENİ İSTİFADEÇİ YARAT</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-lg-5">
+          <div class="top-right">
+            <div class="user-option">
+              <i class="fa fa-user"></i>
+              <span [innerText]="accountInfo!.visibleName"></span>
+              <div class="user-dropdown">
+                <ul>
+                  <li><a >Profil</a></li>
+                  <li><a (click)="logout()">Çıxış</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-logo">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="logo">
+            <a> Tapşırıq idarəetmə sistemi</a>
+          </div>
+        </div>
+        <div class="col-lg-9">
+          <div class="nav-logo-right" *ngIf="accountInfo!=undefined && !accountInfo!.isSuperAdmin">
+            <ul class="d-flex flex-column flex-md-row">
+              <li>
+                <i class="fas fa-signature"></i>
+                <div class="info-text">
+                  <span>Müəssisə:</span>
+                  <p [innerText]="accountInfo!.organisations[0].name"></p>
+                </div>
+              </li>
+              <li>
+                <i class="fas fa-phone"></i>
+                <div class="info-text">
+                  <span>Telefon:</span>
+                  <p [innerText]="accountInfo!.organisations[0].phoneNumber"></p>
+                </div>
+              </li>
+              <li>
+                <i class="fas fa-map"></i>
+                <div class="info-text">
+                  <span>Ünvan:</span>
+                  <p [innerText]="accountInfo!.organisations[0].address"></p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,166 @@
+@import "../../../assets/scss/common/variables";
+
+.header-section {
+    box-shadow: 0 0 42px 5px rgba($colorDark, 0.2);
+    margin-bottom: 40px;
+    & > .top-nav {
+        background-color: $colorDark;
+
+        .main-menu {
+            ul {
+                li {
+                    list-style: none;
+                    display: inline-block;
+                    margin-right: 45px;
+
+                    a {
+                        font-size: 14px;
+                        color: $colorWhite;
+                        font-weight: 500;
+                        text-transform: uppercase;
+                        display: inline-block;
+                        padding: 20px 0;
+                        text-decoration: none;
+                        background-color: transparent;
+                        transition: all 0.3s;
+
+                        &:hover {
+                            color: $colorFocus;
+                        }
+                    }
+
+                    span {
+                        font-size: 14px;
+                        color: $colorWhite;
+                        font-weight: 500;
+                        text-transform: uppercase;
+                        display: inline-block;
+                        padding: 20px 0;
+                        text-decoration: none;
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
+
+        .top-right {
+            display: flex;
+            justify-content: flex-end;
+
+            .user-option {
+                display: inline-block;
+                margin-right: 25px;
+                position: relative;
+                cursor: pointer;
+                padding: 18px 0 19px;
+
+                span {
+                    font-size: 14px;
+                    color: $colorWhite;
+                    display: inline-block;
+                    margin-right: 2px;
+                    margin-left: 10px;
+                }
+                i {
+                    font-size: 14px;
+                    color: $colorWhite;
+                }
+
+                .user-dropdown {
+                    position: absolute;
+                    right: 0;
+                    top: 70px;
+                    background: $colorWhite;
+                    min-width: 130px;
+                    transition: all 0.3s;
+                    opacity: 0;
+                    visibility: hidden;
+                    z-index: 99;
+                    border: 1px solid $colorGray;
+
+                    ul {
+                        padding: 10px 0;
+                        width: 200px;
+
+                        a {
+                            transition: 0.2s all;
+                            display: block;
+                            padding: 10px 10px;
+
+                            &:hover {
+                                background-color: $colorNormal;
+                                color: $colorWhite;
+                            }
+                        }
+                    }
+                }
+
+                &:hover {
+                    .user-dropdown {
+                        top: 50px;
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                }
+            }
+        }
+    }
+
+    & > .nav-logo {
+        .logo {
+            padding: 36px 0;
+            a {
+                display: inline-block;
+            }
+        }
+
+        .nav-logo-right {
+            text-align: right;
+
+            ul {
+                li {
+                    list-style: none;
+                    display: inline-block;
+                    margin-left: 45px;
+                    padding: 25px 0 25px;
+                    flex-grow: 1;
+
+                    i {
+                        float: left;
+                        width: 50px;
+                        height: 50px;
+                        display: inline-block;
+                        text-align: center;
+                        border: 2px solid rgba($colorFocus, 0.2);
+                        line-height: 45px;
+                        color: $colorFocus;
+                        font-size: 20px;
+                        margin-right: 14px;
+
+                        &.fa-phone {
+                            transform: rotate(90deg);
+                        }
+                    }
+
+                    .info-text {
+                        overflow: hidden;
+                        text-align: left;
+
+                        span {
+                            font-size: 14px;
+                            color: $colorDark;
+                            line-height: 15px;
+                            display: inline-block;
+                        }
+
+                        p {
+                            color: $colorDark;
+                            margin-bottom: 0;
+                            margin-top: 4px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -46,7 +46,7 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.AccountModule
                     return new JsonDataResponse<object>
                     {
                         Error = true,
-                        Message = "istifadeci adi gonderilmeyib!"
+                        Message = "İstifadəçi adı göndərilməyib!"
                     };
                 }
                 else if (string.IsNullOrWhiteSpace(request.Password))
@@ -54,7 +54,7 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.AccountModule
                     return new JsonDataResponse<object>
                     {
                         Error = true,
-                        Message = "sifre gonderilmeyib!"
+                        Message = "Şifrə göndərilməyib!"
                     };
                 }
 
@@ -74,7 +74,7 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.AccountModule
                     return new JsonDataResponse<object>
                     {
                         Error = true,
-                        Message = "istifadeci adi ve ya sifre xetalidir!"
+                        Message = "İstifadəçi adı ve ya şifrə xətalıdır!"
                     };
                 }
 
@@ -85,7 +85,7 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.AccountModule
                     return new JsonDataResponse<object>
                     {
                         Error = true,
-                        Message = "hesabiniz kecici olaraq mehdudlashdirilib!"
+                        Message = "Hesabınız keçici olaraq məhdudlaşdırılıb!"
                     };
                 }
                 else if (result.IsNotAllowed)
@@ -93,7 +93,7 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.AccountModule
                     return new JsonDataResponse<object>
                     {
                         Error = true,
-                        Message = "hesabiniz mehdudlashdirilib!"
+                        Message = "Hesabınız məhdudlaşdırılıb!"
                     };
                 }
                 else if (result.Succeeded)
@@ -103,7 +103,7 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.AccountModule
                     return new JsonDataResponse<object>
                     {
                         Error = true,
-                        Message = "istifadeci adi ve ya sifre xetalidir!"
+                        Message = "İstifadəçi adı ve ya şifrə xətalıdır!"
                     };
                 }
 
@@ -135,7 +135,7 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.AccountModule
 
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-                DateTime expired = DateTime.UtcNow.AddMinutes(5);
+                DateTime expired = DateTime.UtcNow.AddMinutes(Convert.ToInt32(configuration["jwt:expireMinutes"]));
 
                 var tokenObj = new JwtSecurityToken(issuer, audience, claims,
                     expires: expired,
@@ -145,7 +145,7 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.AccountModule
                 return new JsonDataResponse<object>
                 {
                     Error = false,
-                    Message = "Ugurludur!",
+                    Message = "Uğurludur!",
                     Data = new
                     {
                         Token = new JwtSecurityTokenHandler().WriteToken(tokenObj),

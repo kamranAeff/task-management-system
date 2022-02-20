@@ -1,0 +1,10 @@
+<div class="login-container">
+  <div class="login-overlay"></div>
+  <form class="login-area" (submit)="onSubmit($event)">
+    <h1>SİSTEMƏ GİRİŞ</h1>
+    <input type="text" class="login-input" placeholder="İstifadəçi adı və ya e-poçt" name="userName"
+      [(ngModel)]="user.userName" />
+    <input type="password" class="login-input" placeholder="Şifrə" name="password" [(ngModel)]="user.password" />
+    <input type="submit" value="Daxil ol" />
+  </form>
+</div>

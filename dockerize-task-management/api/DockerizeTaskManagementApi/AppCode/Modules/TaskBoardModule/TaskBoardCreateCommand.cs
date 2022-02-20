@@ -13,6 +13,7 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.TaskBoardModule
     public class TaskBoardCreateCommand : IRequest<JsonResponse>
     {
         public string Title { get; set; }
+        public string Description { get; set; }
 
         public class TaskBoardCreateCommandHandler : IRequestHandler<TaskBoardCreateCommand, JsonResponse>
         {
@@ -26,8 +27,8 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.TaskBoardModule
             }
             public async Task<JsonResponse> Handle(TaskBoardCreateCommand request, CancellationToken cancellationToken)
             {
-                int currentUserId = ctx.GetPrincipalId().Value;
-                int organisationId = ctx.GetOrganisationId().Value;
+                int currentUserId = ctx.GetPrincipalId();
+                int? organisationId = ctx.GetOrganisationId();
 
                 var existedBoard = await db.Boards.FirstOrDefaultAsync(b => b.Title.Equals(request.Title) && b.OrganisationId == organisationId, cancellationToken);
 
@@ -43,8 +44,9 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.TaskBoardModule
                 var taskBoard = new TaskBoard
                 {
                     Title = request.Title,
+                    Description = request.Description,
                     CreatedByUserId = currentUserId,
-                    OrganisationId = organisationId,
+                    OrganisationId = organisationId.Value,
                 };
 
                 db.Boards.Add(taskBoard);

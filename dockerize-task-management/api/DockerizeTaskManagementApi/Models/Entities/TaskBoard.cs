@@ -8,6 +8,7 @@ namespace DockerizeTaskManagementApi.Models.Entities
     {
         public int Id { get; set; }
         public string Title { get; set; }
+        public string Description { get; set; }
         public int CreatedByUserId { get; set; }
         public virtual AppUser CreatedByUser { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow.AddHours(4);

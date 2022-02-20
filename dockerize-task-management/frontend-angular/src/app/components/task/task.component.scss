@@ -1,0 +1,133 @@
+@import "../../../assets/scss/common/variables";
+
+[caption] {
+    &::before {
+        content: attr(caption);
+        display: inline-block;
+        margin-right: 4px;
+    }
+}
+
+.task {
+    padding-top: 25px;
+    padding-bottom: 25px;
+
+    h5 {
+        margin-bottom: 0.25rem !important;
+        display: flex;
+        align-items: center;
+
+        &.Complated {
+            &::after {
+                content: "";
+                display: inline-block;
+                min-width: 16px;
+                width: 16px;
+                height: 16px;
+                color: inherit;
+                background-image: url(../../../assets/icons/success-circle-fill.svg);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+
+                margin-left: 10px;
+            }
+        }
+    }
+    p {
+        margin-bottom: 20px !important;
+    }
+
+    .task-footer {
+        display: flex;
+        justify-content: space-between;
+
+        .deadline {
+            transition: 0.2s all;
+            border: 1px solid $colorNormal;
+            color: $colorNormal;
+            border-radius: 5px;
+            padding: 2px 6px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+
+            .select-option {
+                display: inline-block;
+                margin-right: 14px;
+                position: relative;
+                cursor: pointer;
+
+                span {
+                    border: 1px solid $colorNormal;
+                    color: $colorNormal;
+                    border-radius: 5px;
+                    padding: 2px 6px;
+                    font-size: 14px;
+                    display: inline-block;
+                    margin-right: 2px;
+                    margin-left: 10px;
+
+                    &.Complated {
+                        border: 1px solid $colorFocus;
+                        background-color: $colorFocus;
+                        color: $colorWhite;
+                    }
+
+                    &.Low {
+                        border: 1px solid $colorWarning;
+                        color: $colorWarning;
+                    }
+
+                    &.High {
+                        border: 1px solid $colorError;
+                        background-color: $colorError;
+                        color: $colorWhite;
+                    }
+                }
+
+                .select-dropdown {
+                    position: absolute;
+                    right: 0;
+                    top: 70px;
+                    padding: 5px 0;
+                    background: $colorWhite;
+                    min-width: 130px;
+                    transition: all 0.3s;
+                    opacity: 0;
+                    visibility: hidden;
+                    z-index: 99;
+                    border: 1px solid $colorGray;
+
+                    a {
+                        transition: 0.2s all;
+                        display: block;
+                        padding: 10px 10px;
+
+                        &:hover {
+                            background-color: $colorNormal;
+                            color: $colorWhite;
+                        }
+                    }
+                }
+
+                &:hover {
+                    .select-dropdown {
+                        opacity: 1;
+                        visibility: visible;
+                        top: 28px;
+                    }
+                }
+            }
+        }
+    }
+
+    &:hover {
+        .deadline {
+            background-color: $colorNormal;
+            color: $colorWhite !important;
+        }
+    }
+}

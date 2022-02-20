@@ -41,7 +41,7 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.AccountModule
 
             public async Task<JsonResponse> Handle(AccountCreateTicketCommand request, CancellationToken cancellationToken)
             {
-                int currentUserId = ctx.GetPrincipalId().Value;
+                int currentUserId = ctx.GetPrincipalId();
 
                 var user = await userManager.FindByEmailAsync(request.Email);
 
