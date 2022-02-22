@@ -7,6 +7,11 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.AccountModule.Mapper.Conver
     {
         public string Convert(AppUser user, ResolutionContext context)
         {
+            return GetVisibleName(user);
+        }
+
+        static public string GetVisibleName(AppUser user)
+        {
             if (user == null)
                 return null;
 

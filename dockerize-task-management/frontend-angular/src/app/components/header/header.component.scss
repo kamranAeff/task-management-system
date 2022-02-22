@@ -39,6 +39,12 @@
                         text-decoration: none;
                         background-color: transparent;
                     }
+
+                    &.active {
+                        a {
+                            color: $colorFocus;
+                        }
+                    }
                 }
             }
         }

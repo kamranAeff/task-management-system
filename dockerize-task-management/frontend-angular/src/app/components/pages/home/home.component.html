@@ -2,17 +2,36 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-10 offset-1">
+    <div class="col-12 col-lg-8 offset-lg-2 d-flex justify-content-end">
+      <a class="btn btn-sm btn-success" (click)="createNewBoardOpen($event)">Create new board</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-8 offset-lg-2">
       <div class="card mt-3 board" *ngFor="let board of boards">
         <div class="card-header" [innerText]="board.title"></div>
         <div class="card-body">
           <p class="card-text" [innerText]="board.description"></p>
-          <a href="#" class="btn btn-primary">Yenisini yarat</a>
+          <a class="btn btn-sm btn-success " (click)="createNewTaskOpen($event,board.id)">Create new task</a>
           <ul class="list-group list-group-flush mt-3">
-            <app-task [task]="item" *ngFor="let item of board.tasks"></app-task>
+            <app-task (addMember)="onAddMember($event)" [task]="item" *ngFor="let item of board.tasks"></app-task>
           </ul>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+
+<div class="popup-container">
+
+  <app-task-create (done)="onTaskDone($event)" (close)="onClose($event)" [task]="task" [show]="showCreateNewTaskModal">
+  </app-task-create>
+
+  <app-board-create (done)="onBoardDone($event)" (close)="onClose($event)" [board]="board"
+    [show]="showCreateBoardModal"></app-board-create>
+
+  <app-task-addmember #addmember (onClose)="onCloseMemberModal($event)"></app-task-addmember>
+
+  <div class="popup-overlay"></div>
 </div>

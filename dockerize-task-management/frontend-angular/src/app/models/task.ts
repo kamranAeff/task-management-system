@@ -1,3 +1,5 @@
+import { UserChoose } from "./user-choose";
+
 export interface Task {
     id: number;
     title: string;
@@ -8,4 +10,16 @@ export interface Task {
     authorId: number;
     author: string;
     createdDate: string;
+    users: UserChoose[];
+}
+
+export interface TaskCreateModel {
+    id: number;
+    title: string;
+    boardId: number;
+    description: string;
+    deadline: Date;
+    priority: string;
+    users: UserChoose[];
+    mappedUserIds: number[];
 }

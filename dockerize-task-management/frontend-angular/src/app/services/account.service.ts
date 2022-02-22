@@ -7,6 +7,7 @@ import { AccountSelectedTab } from './common/account-selected-tab';
 import { LoginResponse, LoginUser } from '../models/login-user';
 import { AccountInfo } from '../models/account-details';
 import { Router } from '@angular/router';
+import { UserChoose } from '../models/user-choose';
 
 @Injectable({
     providedIn: 'root'
@@ -44,11 +45,18 @@ export class AccountService {
             });
     }
 
-    fillInfo() {
+    getUsers(): Observable<UserChoose[]> {
+        return this.httpClient.get<UserChoose[]>(`${environment.apiUrl}/account/users`);
+    }
+
+    fillInfo(callback: any = null) {
         this.httpClient.get<AccountInfo>(`${environment.apiUrl}/account/account-info`)
             .subscribe(response => {
                 this.accountDetails = response;
                 console.log(response);
+
+                if (callback != null && typeof callback == 'function')
+                    callback();
             });
     }
 

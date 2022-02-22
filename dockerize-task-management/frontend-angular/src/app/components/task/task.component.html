@@ -1,25 +1,43 @@
 <a class="list-group-item list-group-item-action task">
   <div class="d-flex w-100 justify-content-between">
     <h5 [ngClass]="task.status" [innerText]="task.title"></h5>
-    <small [innerText]="task.createdDate"></small>
+    <div class="d-flex flex-column align-items-end">
+      <small [innerText]="task.author"></small>
+      <small [innerText]="task.createdDate"></small>
+    </div>
   </div>
   <p class="mb-1" [innerText]="task.description"></p>
   <div class="task-footer">
     <small class="deadline" caption="Deadline: " [innerText]="task.deadline"></small>
-    <div class="options">
+    <div class="d-flex justify-content-between">
+      <div class="members select-option">
+        <span>
+          <i class="fas fa-user"></i>
+          {{task.users.length}}
+        </span>
+        <ul class="select-dropdown">
+          <li *ngFor="let item of task.users">
+            <a>{{item.name}}</a>
+          </li>
+          <li class="border-top">
+            <a (click)="onAddMember($event,task.id)">Add New</a>
+          </li>
+        </ul>
+      </div>
       <div class="select-option">
         <span [innerText]="task.status" [ngClass]="task.status" caption="Status: "></span>
         <ul class="select-dropdown">
-          <li><a (click)="changeStatus($event,'New')" *ngIf="task.status!='New'">New</a></li>
-          <li><a (click)="changeStatus($event,'Complated')" *ngIf="task.status!='Complated'">Complated</a></li>
+          <li *ngFor="let item of getStatuses()"><a (click)="changeStatus($event,item)"
+              *ngIf="task.status!=item">{{item}}</a>
+          </li>
         </ul>
       </div>
       <div class="select-option">
         <span [innerText]="task.priority" [ngClass]="task.priority" caption="Priority: "></span>
         <ul class="select-dropdown">
-          <li><a (click)="changePriority($event,'Low')" *ngIf="task.priority!='Low'">Low</a></li>
-          <li><a (click)="changePriority($event,'Normal')" *ngIf="task.priority!='Normal'">Normal</a></li>
-          <li><a (click)="changePriority($event,'High')" *ngIf="task.priority!='High'">High</a></li>
+          <li *ngFor="let item of getPriorities()">
+            <a (click)="changePriority($event,item)" *ngIf="task.priority!=item">{{item}}</a>
+          </li>
         </ul>
       </div>
     </div>

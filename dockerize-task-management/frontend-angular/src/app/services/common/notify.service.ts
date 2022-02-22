@@ -15,7 +15,7 @@ export class NotifyService {
         okCallback();
       } else {
       }
-    }, () => { }).set('labels', { ok: 'Təsdiqlə', cancel: 'İmtina' });
+    }, () => { }).set('labels', { ok: 'Accept', cancel: 'Cancel' });
   }
 
   success(message: string) {

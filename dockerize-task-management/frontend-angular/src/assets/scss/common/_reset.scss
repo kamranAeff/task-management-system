@@ -1,6 +1,7 @@
-*{
+* {
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
+    position: relative;
 }
 ul {
     margin: 0;
@@ -10,4 +11,9 @@ ul {
 
 a {
     text-decoration: none;
+}
+
+.list-group-item-action,
+.list-group-item-action {
+    z-index: 0;
 }

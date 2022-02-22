@@ -11,14 +11,24 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { AuthorizeGuard } from './guards/authorize.guard';
 import { HeaderComponent } from './components/header/header.component';
 import { TaskComponent } from './components/task/task.component';
+import { TaskCreateComponent } from './components/task-create/task-create.component';
+import { BoardCreateComponent } from './components/board-create/board-create.component';
+import { TaskAddMemberComponent } from './components/task-addmember/task-addmember.component';
+import { UserFilterPipe } from './pipes/user-filter.pipe';
+import { UsersComponent } from './components/pages/users/users.component';
 
 @NgModule({
   declarations: [
+    UserFilterPipe,
     AppComponent,
     LoginComponent,
     HeaderComponent,
     TaskComponent,
-    HomeComponent
+    TaskCreateComponent,
+    TaskAddMemberComponent,
+    BoardCreateComponent,
+    HomeComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

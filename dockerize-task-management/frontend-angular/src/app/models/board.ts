@@ -12,3 +12,9 @@ export interface Board {
     organisation: Organisation;
     tasks: Task[];
 }
+
+export interface BoardCreateModel {
+    id: number;
+    title: string;
+    description: string;
+}

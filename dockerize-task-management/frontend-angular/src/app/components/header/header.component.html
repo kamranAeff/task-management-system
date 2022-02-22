@@ -5,20 +5,23 @@
         <div class="col-lg-7">
           <nav class="main-menu">
             <ul>
-              <li class="active">
-                <a href="./index.html">YENİ İSTİFADEÇİ YARAT</a>
+              <li [routerLinkActive]="['active']">
+                <a [routerLink]="['/home']">Tasks</a>
+              </li>
+              <li [routerLinkActive]="['active']" *ngIf="!accountInfo!.isUser">
+                <a [routerLink]="['/users']">Users</a>
               </li>
             </ul>
           </nav>
         </div>
         <div class="col-lg-5">
-          <div class="top-right">
+          <div class="top-right justify-content-center justify-content-lg-end">
             <div class="user-option">
               <i class="fa fa-user"></i>
               <span [innerText]="accountInfo!.visibleName"></span>
               <div class="user-dropdown">
                 <ul>
-                  <li><a >Profil</a></li>
+                  <li><a>Profil</a></li>
                   <li><a (click)="logout()">Çıxış</a></li>
                 </ul>
               </div>
@@ -33,11 +36,12 @@
       <div class="row">
         <div class="col-lg-3">
           <div class="logo">
-            <a> Tapşırıq idarəetmə sistemi</a>
+            <a> Logo</a>
           </div>
         </div>
         <div class="col-lg-9">
-          <div class="nav-logo-right" *ngIf="accountInfo!=undefined && !accountInfo!.isSuperAdmin">
+          <div class="nav-logo-right"
+            *ngIf="accountInfo!=undefined && !accountInfo!.isSuperAdmin && accountInfo!.organisations!.length==1">
             <ul class="d-flex flex-column flex-md-row">
               <li>
                 <i class="fas fa-signature"></i>

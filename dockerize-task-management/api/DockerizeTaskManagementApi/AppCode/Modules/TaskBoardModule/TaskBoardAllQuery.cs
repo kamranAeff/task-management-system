@@ -30,16 +30,18 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.TaskBoardModule
 
 
                 var query = db.Boards
-                    .Include(b => b.Tasks)
                     .Include(b => b.Organisation)
+                    .Include(b => b.Tasks)
+                    .ThenInclude(t => t.MappedUsers)
+                    .ThenInclude(t => t.User)
                     .AsQueryable();
 
 
                 if (!ctx.IsInRole("SuperAdmin") && organisationId.HasValue)
                 {
-                    query = query.Where(b=>b.OrganisationId==organisationId.Value);
+                    query = query.Where(b => b.OrganisationId == organisationId.Value);
                 }
-                else if(!ctx.IsInRole("SuperAdmin"))
+                else if (!ctx.IsInRole("SuperAdmin"))
                 {
                     query = query.Take(0);
                 }

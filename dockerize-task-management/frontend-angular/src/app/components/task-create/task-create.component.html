@@ -1,0 +1,61 @@
+<div class="popup-dialog" [ngClass]="{'open':show}">
+  <form class="popup-area" (submit)="onSubmit($event)" method="post" #createNewTask>
+    <div class="popup-header">
+      <h5 class="popup-title">Create new task</h5>
+      <button type="button" class="btn-close" (click)="onClose($event)">
+        <span>×</span>
+      </button>
+    </div>
+    <div class="popup-body">
+      <div class="form-row">
+        <div class="col-12">
+          <div class="control-group">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" [(ngModel)]="task.title" />
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="control-group">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description"
+              [(ngModel)]="task.description"></textarea>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="control-group">
+            <label for="deadline" class="form-label">Deadline</label>
+            <input type="datetime-local" class="form-control" id="deadline" name="deadline" [(ngModel)]="task.deadline"
+              [ngModel]="task.deadline | date:'yyyy-MM-ddThh:mm'" />
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+          <div class="control-group">
+            <label for="priority" class="form-label">Priority</label>
+            <select class="custom-select" id="priority" name="priority" [(ngModel)]="task.priority">
+              <option [value]="item" *ngFor="let item of getPriorities()">{{item}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="control-group">
+            <label for="users" class="form-label section">Users</label>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let item of task.users">
+                <div class="checkbox">
+                  <input type="checkbox" [name]="'member-user-'+item.id" [id]="['check-user-'+item.id]" [(ngModel)]="item.selected" />
+                  <label [innerText]="item.name" [for]="['check-user-'+item.id]"></label>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="popup-footer">
+      <button type="submit" class="btn btn-sm btn-primary">Save changes</button>
+      <button type="button" class="btn btn-sm btn-secondary" (click)="onClose($event)">Close</button>
+    </div>
+  </form>
+</div>

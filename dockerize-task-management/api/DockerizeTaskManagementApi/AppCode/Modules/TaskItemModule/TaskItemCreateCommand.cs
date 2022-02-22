@@ -18,7 +18,6 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.TaskItemModule
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime Deadline { get; set; }
-        public TaskItemStatus Status { get; set; }
         public TaskItemPriority Priority { get; set; }
         public int BoardId { get; set; }
         public int[] MappedUserIds { get; set; }
@@ -66,7 +65,7 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.TaskItemModule
                     TaskBoardId = board.Id,
                     Deadline = request.Deadline,
                     Description = request.Description,
-                    Status = request.Status,
+                    Status = TaskItemStatus.New,
                     Priority = request.Priority,
                     CreatedByUserId = currentUserId,
                 };

@@ -14,6 +14,7 @@ namespace DockerizeTaskManagementApi.Models.DataContexts
         public DbSet<Organisation> Organisations { get; set; }
         public DbSet<TaskBoard> Boards { get; set; }
         public DbSet<TaskItem> Tasks { get; set; }
+        public DbSet<TaskItemUserCollection> TaskItemUserCollection { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

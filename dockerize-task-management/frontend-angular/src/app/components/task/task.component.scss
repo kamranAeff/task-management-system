@@ -50,75 +50,81 @@
             padding: 2px 6px;
         }
 
-        .options {
-            display: flex;
-            justify-content: space-between;
-
-            .select-option {
+        .members {
+            color: $colorDark;
+            cursor: pointer;
+            span {
                 display: inline-block;
-                margin-right: 14px;
-                position: relative;
-                cursor: pointer;
+                margin-left: 5px;
+            }
+        }
 
-                span {
-                    border: 1px solid $colorNormal;
-                    color: $colorNormal;
-                    border-radius: 5px;
-                    padding: 2px 6px;
-                    font-size: 14px;
-                    display: inline-block;
-                    margin-right: 2px;
-                    margin-left: 10px;
+        .select-option {
+            display: inline-block;
+            margin: 0px;
+            position: relative;
+            cursor: pointer;
 
-                    &.Complated {
-                        border: 1px solid $colorFocus;
-                        background-color: $colorFocus;
-                        color: $colorWhite;
-                    }
+            span {
+                border: 1px solid $colorNormal;
+                color: $colorNormal;
+                border-radius: 5px;
+                padding: 2px 6px;
+                font-size: 14px;
+                display: inline-block;
+                margin-right: 2px;
+                margin-left: 10px;
 
-                    &.Low {
-                        border: 1px solid $colorWarning;
-                        color: $colorWarning;
-                    }
+                &.Complated {
+                    border: 1px solid $colorFocus;
+                    background-color: $colorFocus;
+                    color: $colorWhite;
+                }
 
-                    &.High {
-                        border: 1px solid $colorError;
-                        background-color: $colorError;
+                &.Low {
+                    border: 1px solid $colorWarning;
+                    color: $colorWarning;
+                }
+
+                &.High {
+                    border: 1px solid $colorError;
+                    background-color: $colorError;
+                    color: $colorWhite;
+                }
+            }
+
+            .select-dropdown {
+                position: absolute;
+                right: 0;
+                top: 70px;
+                padding: 5px 0;
+                background: $colorWhite;
+                min-width: 130px;
+                transition: all 0.3s;
+                opacity: 0;
+                visibility: hidden;
+                z-index: 99;
+                border: 1px solid $colorGray;
+
+                a {
+                    transition: 0.2s all;
+                    display: block;
+                    padding: 10px 10px;
+                    white-space: nowrap;
+                    user-select: none;
+
+                    &:hover {
+                        background-color: $colorNormal;
                         color: $colorWhite;
                     }
                 }
+            }
 
+            &:hover {
                 .select-dropdown {
-                    position: absolute;
-                    right: 0;
-                    top: 70px;
-                    padding: 5px 0;
-                    background: $colorWhite;
-                    min-width: 130px;
-                    transition: all 0.3s;
-                    opacity: 0;
-                    visibility: hidden;
-                    z-index: 99;
-                    border: 1px solid $colorGray;
-
-                    a {
-                        transition: 0.2s all;
-                        display: block;
-                        padding: 10px 10px;
-
-                        &:hover {
-                            background-color: $colorNormal;
-                            color: $colorWhite;
-                        }
-                    }
-                }
-
-                &:hover {
-                    .select-dropdown {
-                        opacity: 1;
-                        visibility: visible;
-                        top: 28px;
-                    }
+                    opacity: 1;
+                    visibility: visible;
+                    top: 28px;
                 }
             }
         }

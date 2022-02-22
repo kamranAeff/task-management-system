@@ -52,5 +52,23 @@ namespace DockerizeTaskManagementApi.Controllers
 
             return Ok(response);
         }
+
+
+        [HttpGet("{TaskId}/members")]
+        public async Task<IActionResult> AllMembers([FromRoute]TaskItemMembersQuery query)
+        {
+            var response = await mediator.Send(query);
+
+            return Ok(response);
+        }
+
+        [Authorize(Roles = "OrganisationAdmin,User")]
+        [HttpPost("choose-member")]
+        public async Task<IActionResult> ChooseMember(TaskItemChooseMemberCommand command)
+        {
+            var response = await mediator.Send(command);
+
+            return Ok(response);
+        }
     }
 }

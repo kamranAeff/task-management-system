@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace DockerizeTaskManagementApi.AppCode.Modules.AccountModule.Mapper.Dtos
+﻿namespace DockerizeTaskManagementApi.AppCode.Modules.AccountModule.Mapper.Dtos
 {
     public class AccountInfoDto
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Patronymic { get; set; }

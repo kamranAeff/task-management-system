@@ -44,6 +44,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                     else if (error.status == 403) {
                         this.notify.warning('Səlahiyyətiniz yoxdur!');
                     }
+                    else if (error.status == 404) {
+                        this.notify.warning('Mənbə tapılmadı!');
+                    }
                 }
 
                 if (error.error?.errors != undefined) {

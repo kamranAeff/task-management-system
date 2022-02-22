@@ -2,9 +2,11 @@
 using DockerizeTaskManagementApi.AppCode.Infrastructure;
 using DockerizeTaskManagementApi.AppCode.Modules.AccountModule;
 using DockerizeTaskManagementApi.AppCode.Modules.AccountModule.Mapper.Dtos;
+using DockerizeTaskManagementApi.AppCode.Modules.TaskBoardModule.Mapper.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DockerizeTaskManagementApi.Controllers
@@ -67,6 +69,27 @@ namespace DockerizeTaskManagementApi.Controllers
             var dtoResponse = mapper.Map<AccountInfoDto>(response);
 
             return Ok(dtoResponse);
+        }
+
+        [HttpGet("users")]
+        public async Task<IActionResult> GetAccountInfo([FromRoute] UserChooseQuery query)
+        {
+            try
+            {
+                var response = await mediator.Send(query);
+
+                if (response == null)
+                    return NotFound();
+
+                var dtoResponse = mapper.Map<List<UserChooseDto>>(response);
+
+                return Ok(dtoResponse );
+            }
+            catch (System.Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

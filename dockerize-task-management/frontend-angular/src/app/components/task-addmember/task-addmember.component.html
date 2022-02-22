@@ -1,0 +1,36 @@
+<div class="popup-dialog" #addmember>
+  <form class="popup-area" method="post">
+    <div class="popup-header">
+      <h5 class="popup-title">Choose member(s)</h5>
+      <button type="button" class="btn-close" (click)="ngClose($event)">
+        <span>×</span>
+      </button>
+    </div>
+    <div class="popup-body">
+      <div class="form-row">
+        <div class="col-12">
+          <div class="control-group">
+            <label for="member" class="form-label">Axtar</label>
+            <input type="text" class="form-control" id="findText" name="findText" [(ngModel)]="findText" />
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let item of users | userFilter:findText">
+                <div class="checkbox">
+                  <input type="checkbox" [name]="'member-user-'+item.id" [id]="['member-user-'+item.id]"
+                    [(ngModel)]="item.selected" (change)="onChange(item)" />
+                  <label [innerText]="item.name" [for]="['member-user-'+item.id]"></label>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="popup-footer">
+      <button type="button" class="btn btn-sm btn-secondary" (click)="ngClose($event)">Close</button>
+    </div>
+  </form>
+</div>

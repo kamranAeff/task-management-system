@@ -1,0 +1,17 @@
+.card {
+    transition: 0.3s all;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    img {
+        width: 150px;
+        height: 150px;
+        margin-left: 16px;
+    }
+
+    &:hover {
+        box-shadow: 0 0 42px 5px rgb(25 25 25 / 20%);
+    }
+}

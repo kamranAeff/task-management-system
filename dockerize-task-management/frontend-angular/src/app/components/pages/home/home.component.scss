@@ -1,7 +1,7 @@
+@import "../../../../assets/scss/common/variables";
+
 .board {
-    .card-header {
-        padding: 1rem 1rem;
-    }
+    transition: 0.3s all;
     &:hover {
         box-shadow: 0 0 42px 5px rgb(25 25 25 / 20%);
     }

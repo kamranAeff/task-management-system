@@ -3,6 +3,7 @@ using DockerizeTaskManagementApi.AppCode.Modules.AccountModule.Mapper.Dtos;
 using DockerizeTaskManagementApi.Models.DataContexts;
 using DockerizeTaskManagementApi.Models.Entities.Membership;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 
@@ -37,7 +38,7 @@ namespace DockerizeTaskManagementApi.AppCode.Modules.AccountModule.Mapper.Resolv
             }
             else if(destination.IsSuperAdmin)
             {
-                return context.Mapper.Map<OrganisationDto[]>(db.Organisations.ToArray());
+                return context.Mapper.Map<OrganisationDto[]>(db.Organisations.AsNoTracking().ToArray());
             }
 
             return null;

@@ -1,0 +1,28 @@
+<app-header [accountInfo]="accountService.accountDetails"></app-header>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-lg-6 col-xl-4 mb-3" *ngFor="let item of users">
+      <div class="card">
+        <img src="assets/images/blank-profile-picture.webp" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title" [innerText]="item.visibleName"></h5>
+          <ul class="card-text mb-2">
+            <li><strong>Name: </strong>{{item.name}}</li>
+            <li><strong>Surname: </strong>{{item.surname}}</li>
+            <li><strong>Email: </strong>{{item.email}}</li>
+            <li><strong>Role: </strong>
+              <span *ngIf="item.isSuperAdmin">SuperAdmin</span>
+              <span *ngIf="item.isOrganisationAdmin">OrganisationAdmin</span>
+              <span *ngIf="item.isUser">User</span>
+            </li>
+            <li *ngIf="accountService!.accountDetails!.isSuperAdmin" class="mt-2">
+              <a (click)="setRole(item.id,'OrganisationAdmin')" class="btn btn-sm btn-outline-danger" *ngIf="item.isUser">Set as Organisation admin</a>
+              <a (click)="setRole(item.id,'User')" class="btn btn-sm btn-outline-secondary" *ngIf="item.isOrganisationAdmin">Set as ordinary user</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

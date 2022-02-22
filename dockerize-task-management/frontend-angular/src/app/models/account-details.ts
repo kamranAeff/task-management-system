@@ -1,6 +1,7 @@
 import { Organisation } from "./organisation";
 
 export interface AccountInfo {
+    id: number;
     name: string;
     surname: string;
     patronymic?: any;

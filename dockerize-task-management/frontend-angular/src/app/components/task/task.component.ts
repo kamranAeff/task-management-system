@@ -1,7 +1,7 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Task } from 'src/app/models/task';
-import { TaskPriorityChange } from 'src/app/models/task-priority-change copy';
-import { TaskStatusChange } from 'src/app/models/task-status-change';
+import { priorities, TaskPriorityChange } from 'src/app/models/task-priority-change';
+import { statuses, TaskStatusChange } from 'src/app/models/task-status-change';
 import { NotifyService } from 'src/app/services/common/notify.service';
 import { TaskService } from 'src/app/services/task.service';
 
@@ -12,11 +12,13 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class TaskComponent implements OnInit {
   @Input() task!: Task;
+  @Output() addMember: EventEmitter<any> = new EventEmitter();
 
   constructor(private notify: NotifyService, private taskService: TaskService) { }
 
   ngOnInit() {
   }
+
   changeStatus(event: any, status: string) {
     this.notify.confirm("Question", "You are sure?", () => {
       this.taskService.changeStatus({
@@ -49,5 +51,19 @@ export class TaskComponent implements OnInit {
           this.task.priority = priority;
         });
     });
+  }
+
+
+  getStatuses(): string[] {
+    return statuses;
+  }
+
+  getPriorities(): string[] {
+    return priorities;
+  }
+
+  onAddMember(event: any, id: number) {
+    event.taskId = id;
+    this.addMember.emit(event);
   }
 }
