@@ -16,6 +16,8 @@ import { BoardCreateComponent } from './components/board-create/board-create.com
 import { TaskAddMemberComponent } from './components/task-addmember/task-addmember.component';
 import { UserFilterPipe } from './pipes/user-filter.pipe';
 import { UsersComponent } from './components/pages/users/users.component';
+import { UserSignupTicketComponent } from './components/user-signup-ticket/user-signup-ticket.component';
+import { ComplateSignupComponent } from './components/pages/complate-signup/complate-signup.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { UsersComponent } from './components/pages/users/users.component';
     TaskAddMemberComponent,
     BoardCreateComponent,
     HomeComponent,
-    UsersComponent
+    UsersComponent,
+    UserSignupTicketComponent,
+    ComplateSignupComponent
   ],
   imports: [
     BrowserModule,

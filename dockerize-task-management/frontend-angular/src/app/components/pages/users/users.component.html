@@ -2,6 +2,11 @@
 
 <div class="container-fluid">
   <div class="row">
+    <div class="col-10 mb-3">
+      <a class="btn btn-sm btn-success" (click)="createNewTicket($event)">Create new user</a>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-12 col-lg-6 col-xl-4 mb-3" *ngFor="let item of users">
       <div class="card">
         <img src="assets/images/blank-profile-picture.webp" class="card-img-top" alt="...">
@@ -17,12 +22,21 @@
               <span *ngIf="item.isUser">User</span>
             </li>
             <li *ngIf="accountService!.accountDetails!.isSuperAdmin" class="mt-2">
-              <a (click)="setRole(item.id,'OrganisationAdmin')" class="btn btn-sm btn-outline-danger" *ngIf="item.isUser">Set as Organisation admin</a>
-              <a (click)="setRole(item.id,'User')" class="btn btn-sm btn-outline-secondary" *ngIf="item.isOrganisationAdmin">Set as ordinary user</a>
+              <a (click)="setRole(item.id,'OrganisationAdmin')" class="btn btn-sm btn-outline-danger"
+                *ngIf="item.isUser">Set as Organisation admin</a>
+              <a (click)="setRole(item.id,'User')" class="btn btn-sm btn-outline-secondary"
+                *ngIf="item.isOrganisationAdmin">Set as ordinary user</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+
+<div class="popup-container">
+  <app-user-signup-ticket #ticket (done)="onTicketDone($event)" (close)="onTicketClose($event)"></app-user-signup-ticket>
+
+  <div class="popup-overlay"></div>
 </div>

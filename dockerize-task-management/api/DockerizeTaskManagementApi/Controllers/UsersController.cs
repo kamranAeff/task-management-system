@@ -27,22 +27,21 @@ namespace DockerizeTaskManagementApi.Controllers
         [HttpGet]
         public async Task<IActionResult> Users([FromRoute] UserChooseQuery query)
         {
-            try
-            {
-                var response = await mediator.Send(query);
+            var response = await mediator.Send(query);
 
-                if (response == null)
-                    return NotFound();
+            if (response == null)
+                return NotFound();
 
-                var dtoResponse = mapper.Map<List<AccountInfoDto>>(response);
+            var dtoResponse = mapper.Map<List<AccountInfoDto>>(response);
 
-                return Ok(dtoResponse);
-            }
-            catch (Exception ex)
-            {
+            return Ok(dtoResponse);
+        }
 
-                throw;
-            }
+        [HttpPost("set-role")]
+        public async Task<IActionResult> SetRole(UserSetRoleCommand command)
+        {
+            var response = await mediator.Send(command);
+            return Ok(response);
         }
     }
 }

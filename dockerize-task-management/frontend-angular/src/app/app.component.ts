@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginUser } from './models/login-user';
 import { AccountService } from './services/account.service';
 import { NotifyService } from './services/common/notify.service';
@@ -12,6 +13,13 @@ export class AppComponent {
   title = 'frontend-angular';
 
   constructor(private notify: NotifyService, public accountService: AccountService) { }
+
+  showLogin() {
+    if (location.pathname == '/complate-signup')
+      return true;
+      
+    return this.accountService.loggedIn;
+  }
 
   onMessage() {
     this.notify.confirm("Razisan?", "oke?", () => {

@@ -102,7 +102,7 @@ export class HomeComponent implements OnInit {
 
   onAddMember(event: any) {
     event.state = true;
-    this.addMember.ngChangeVisible(event)
+    this.addMember.ngChangeVisible(event);
   }
 
   onCloseMemberModal(event: any) {

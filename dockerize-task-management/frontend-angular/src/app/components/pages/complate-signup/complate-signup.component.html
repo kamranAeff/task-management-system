@@ -1,0 +1,11 @@
+<div class="login-container">
+  <div class="login-overlay"></div>
+  <form class="login-area" (submit)="onSubmit($event)">
+    <h1>Qeydiyyatı tamamla</h1>
+    <input type="email" class="login-input" placeholder="Email" name="email" [(ngModel)]="user.email" />
+    <input type="password" class="login-input" placeholder="Password" name="password" [(ngModel)]="user.password" />
+    <input type="password" class="login-input" placeholder="Confirm password " name="password"
+      [(ngModel)]="user.passwordConfirm" />
+    <input type="submit" value="Daxil ol" />
+  </form>
+</div>

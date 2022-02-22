@@ -8,6 +8,9 @@ import { LoginResponse, LoginUser } from '../models/login-user';
 import { AccountInfo } from '../models/account-details';
 import { Router } from '@angular/router';
 import { UserChoose } from '../models/user-choose';
+import { JsonResponse } from '../models/json-response';
+import { UserSignupTicket } from '../models/user-signup-ticket';
+import { UserSignupComplate } from '../models/user-signup-complate';
 
 @Injectable({
     providedIn: 'root'
@@ -67,4 +70,18 @@ export class AccountService {
         this.route.navigate(['/']);
     }
 
+
+    sendSignupTicket(model: UserSignupTicket): Observable<JsonResponse> {
+        return this.httpClient.post<JsonResponse>(`${environment.apiUrl}/account/create-sigup-ticket`, model);
+    }
+
+    //http://localhost:4200/complate-signup?token=qAJEK7BhUmLC2BmRQuP967R9cDae6RjpAV5Mc%2F3l4VK9sLjdPsWW%2FcDMC%2F9quv%2FdWix%2Bz57B6k3SM9WTUVdPFQ%3D%3D
+    complateSignup(model: UserSignupComplate, token: string): Observable<JsonResponse> {
+        console.log(model,token);
+        return this.httpClient.post<JsonResponse>(`${environment.apiUrl}/account/complate-signup`, model, {
+            headers: {
+                'signupToken': token
+            }
+        });
+    }
 }

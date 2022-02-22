@@ -34,7 +34,7 @@ namespace DockerizeTaskManagementApi.AppCode.Extensions
 
         static public Match ReleaseComplateSignupToken(this string value)
         {
-            return Regex.Match(value, @"^(?<id>\d+)#(?<email>[^#\s]*)#(?<pwd>[^#\s]*)#$");
+            return Regex.Match(value, @"^(?<id>\d+)#(?<email>[^#\s]*)#(?<pwd>[^#\s]*)#(?<createdBy>\d+)$");
         }
 
         static public T Read<T>(this Match match ,string key)

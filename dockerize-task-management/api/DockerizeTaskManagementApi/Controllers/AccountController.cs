@@ -74,22 +74,14 @@ namespace DockerizeTaskManagementApi.Controllers
         [HttpGet("users")]
         public async Task<IActionResult> GetAccountInfo([FromRoute] UserChooseQuery query)
         {
-            try
-            {
-                var response = await mediator.Send(query);
+            var response = await mediator.Send(query);
 
-                if (response == null)
-                    return NotFound();
+            if (response == null)
+                return NotFound();
 
-                var dtoResponse = mapper.Map<List<UserChooseDto>>(response);
+            var dtoResponse = mapper.Map<List<UserChooseDto>>(response);
 
-                return Ok(dtoResponse );
-            }
-            catch (System.Exception ex)
-            {
-
-                throw;
-            }
+            return Ok(dtoResponse);
         }
     }
 }
