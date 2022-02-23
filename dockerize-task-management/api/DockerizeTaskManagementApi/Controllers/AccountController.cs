@@ -39,7 +39,7 @@ namespace DockerizeTaskManagementApi.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "SuperAdmin,OrganisationAdmin")]//temporary
+        [Authorize(Roles = "SuperAdmin")]//temporary
         [HttpPost("create-sigup-ticket")]
         public async Task<IActionResult> SigupTicket(AccountCreateTicketCommand command)
         {

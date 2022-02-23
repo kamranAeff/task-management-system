@@ -21,7 +21,7 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
 
     this.accountService.fillInfo(() => {
-      this.userService.getAll().subscribe(response => {
+      this.userService.getAll().subscribe((response:any) => {
         this.users = response;
 
         console.log(response);
@@ -32,7 +32,7 @@ export class UsersComponent implements OnInit {
 
   setRole(userId: number, role: string) {
     console.log(userId, role);
-    this.userService.setUserRole(userId, role).subscribe(response => {
+    this.userService.setUserRole(userId, role).subscribe((response:any) => {
 
       if (response.error) {
         this.notify.error(response.message);
@@ -40,7 +40,7 @@ export class UsersComponent implements OnInit {
       }
       this.notify.success(response.message);
 
-      this.userService.getAll().subscribe(response => {
+      this.userService.getAll().subscribe((response:any) => {
         this.users = response;
       });
     });

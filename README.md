@@ -1,5 +1,8 @@
 # task-management-system
 
+> netstat -ano | findstr :4200  
+> taskkill /PID 20592 /F
+
 
 ###### pending for signup complation
 <pre>

@@ -1,0 +1,120 @@
+@import "../../../../assets/scss/common/variables";
+
+%center {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.friends {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.profile-main-content {
+    min-height: 100vh;
+    width: 100%;
+
+    .profile-content {
+        .profile-cover {
+            // background-image: url(https://picsum.photos/1340/300);
+            background-image: url(https://i.picsum.photos/id/668/1340/300.jpg?hmac=amR3vhpVd6r29O3ayjLNSjqBZuFCD_zlZJxojKcYb5U);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            width: 100%;
+            height: 300px;
+        }
+
+        .profile {
+            margin: auto;
+            width: 80%;
+            position: relative;
+            top: 125px;
+            border: 1px solid $colorGray;
+            border-radius: 20px 20px 0 0;
+
+            .profile-photo {
+                width: $profileImageWidth;
+                height: $profileImageWidth;
+                border-radius: 100%;
+                background-image: url(https://i.picsum.photos/id/435/300/300.jpg?hmac=LCp3lBWr7KH48uf-gFWC7m0VcyeoccVIXWWfwkniZ0M);
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center center;
+                display: inline-block;
+                box-sizing: border-box;
+                border: 5px solid $colorWhite;
+                position: absolute;
+                z-index: 1;
+                top: 125px;
+                @extend %center;
+            }
+
+            .username {
+                margin-top: 60px;
+                font-weight: bold;
+                text-align: center;
+
+                & + .status {
+                    color: $muteText;
+                    font-size: 15px;
+                    font-weight: normal;
+                    display: block;
+                    text-align: center;
+
+                    &::before {
+                        content: '"';
+                    }
+                    &::after {
+                        content: '"';
+                    }
+                }
+            }
+
+            .profile-section {
+                position: relative;
+                background-color: $colorWhite;
+                opacity: 0.97;
+                border-radius: 20px;
+                margin-bottom: 20px;
+                padding: 20px;
+
+                &.head {
+                    padding: 80px;
+                }
+
+                .top-right {
+                    display: flex;
+                    position: absolute;
+                    top: 40px;
+                    right: 40px;
+                }
+
+                .section-title {
+                    font-size: 18px;
+                    padding: 20px;
+                    padding-top: 0px;
+                    margin: 0px;
+                    color: #333333;
+                    letter-spacing: 1px;
+
+                    &:not(.no-border) {
+                        border-bottom: 1px solid $colorGray;
+                    }
+                }
+
+                .personal-info {
+                    padding: 20px;
+                    li {
+                        label {
+                            width: 150px;
+                            font-weight: bold;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

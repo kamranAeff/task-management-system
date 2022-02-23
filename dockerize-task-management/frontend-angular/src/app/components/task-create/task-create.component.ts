@@ -1,9 +1,8 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { TaskCreateModel } from 'src/app/models/task';
 import { priorities } from 'src/app/models/task-priority-change';
 import { statuses } from 'src/app/models/task-status-change';
 import { AccountService } from 'src/app/services/account.service';
-import { BoardsService } from 'src/app/services/boards.service';
 import { NotifyService } from 'src/app/services/common/notify.service';
 import { TaskService } from 'src/app/services/task.service';
 
@@ -20,8 +19,8 @@ export class TaskCreateComponent implements OnInit {
   @Input() task!: TaskCreateModel;
 
   constructor(private taskService: TaskService,
-    private notify: NotifyService,
-    private accountService: AccountService) { }
+  private notify: NotifyService,
+  private accountService: AccountService) { }
 
 
   ngOnInit() {
@@ -35,7 +34,7 @@ export class TaskCreateComponent implements OnInit {
 
   onSubmit(event: any) {
     this.taskService.add(this.task)
-      .subscribe(response => {
+      .subscribe((response:any) => {
         this.show = false;
         event.response = response;
         this.createNewTask.nativeElement.reset();

@@ -15,7 +15,7 @@ export class UserSignupTicketComponent implements OnInit {
   user: UserSignupTicket = {} as UserSignupTicket;
 
   constructor(private notify: NotifyService,
-    public accountService: AccountService) { }
+ public accountService: AccountService) { }
 
 
   ngOnInit() {
@@ -44,7 +44,7 @@ export class UserSignupTicketComponent implements OnInit {
 
   onSubmit(event: any) {
     this.accountService.sendSignupTicket(this.user)
-      .subscribe(response => {
+      .subscribe((response:any) => {
 
         if (response.error) {
 

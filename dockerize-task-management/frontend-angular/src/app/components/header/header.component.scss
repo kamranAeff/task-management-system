@@ -92,8 +92,15 @@
                             transition: 0.2s all;
                             display: block;
                             padding: 10px 10px;
+                            text-decoration: none;
 
                             &:hover {
+                                background-color: $colorNormal;
+                                color: $colorWhite;
+                            }
+
+                            &.active{
+                                
                                 background-color: $colorNormal;
                                 color: $colorWhite;
                             }

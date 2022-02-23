@@ -21,7 +21,7 @@
               <span [innerText]="accountInfo!.visibleName"></span>
               <div class="user-dropdown">
                 <ul>
-                  <li><a>Profil</a></li>
+                  <li><a routerLinkActive="active" [routerLink]="['/profile']">Profil</a></li>
                   <li><a (click)="logout()">Çıxış</a></li>
                 </ul>
               </div>

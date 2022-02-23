@@ -1,0 +1,53 @@
+<app-header [accountInfo]="accountService.accountDetails"></app-header>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="profile-main-content">
+      <div class="profile-content">
+        <div class="profile-cover"></div>
+        <div class="profile">
+          <div class="profile-photo"></div>
+          <section class="profile-section head">
+            <h1 class="username" [innerText]="accountService.accountDetails.visibleName"></h1>
+            <span class="status">Hərf hərf kodlayaq...</span>
+            <ul class="top-right">
+              <!-- <li><a class="btn btn-x btn-sm btn-success">Sistemə qayıt</a></li>
+              <li><a class="btn btn-x btn-sm btn-warning">Redaktə et</a></li> -->
+            </ul>
+          </section>
+          <section class="profile-section">
+            <h3 class="section-title">Əlaqə məlumatları</h3>
+            <div class="row">
+              <ul class="personal-info col-12">
+                <li>
+                  <label>
+                    Name
+                  </label>
+                  {{accountService.accountDetails.name}}
+                </li>
+                <li>
+                  <label>
+                    Surname
+                  </label>
+                  {{accountService.accountDetails.surname}}
+                </li>
+                <li>
+                  <label>
+                    Email
+                  </label>
+                  {{accountService.accountDetails.email}}
+                </li>
+                <li *ngIf="accountService!.accountDetails!.organisations[0]!.name">
+                  <label>
+                    Organisation 
+                  </label>
+                  {{accountService.accountDetails.organisations[0].name}}
+                </li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

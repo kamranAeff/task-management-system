@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  # task-management-api:
+  #   build:
+  #     context: ./../api/DockerizeTaskManagementApi/
+  #     dockerfile: api.dockerfile
+  #   image: task-management-api
+  #   container_name: task-management-api
+  #   environment:
+  #     #- Database__PostgreSql__cString=Host=db.com;Database=taskmanagement;Username=postgres;Password=query;Pooling=true;
+  #     - Database__MsSql__cString=Data Source=db.com;Initial Catalog=TaskManagement;user id=sa;password=query;MultipleActiveResultSets=True;
+  #     - emailAccount__displayName=TaskManagement
+  #     - emailAccount__smtpServer=smtp.mail.ru
+  #     - emailAccount__smtpPort=25
+  #     - emailAccount__userName=fullstackstaff@mail.ru
+  #     - emailAccount__password=&TeeOouTRp!@#
+  #     - emailAccount__cc=kamran_aeff@mail.ru
+  #     - jwt__audience=task-management.az
+  #     - jwt__issuer=task-management.az
+  #     - jwt__secret=8aeefbb9abaf1d58524482459a7eb4312bfe47afcf54dbfda2e1690dfac72398
+  #     - jwt__superAdminRoleName=SuperAdmin
+  #     - jwt__adminEmail=kamran_aeff1@mail.ru
+  #     - jwt__adminPassword=4rL3vLyKcvC9CvVpnAPvaA==
+  #   ports:
+  #     - "8000:80"
+  #     - "8001:443"
+  #   extra_hosts:
+  #     - db.com:192.168.1.190
+  #   # network_mode: host 
+
+  task-management-frontend:
+    build:
+      context: ./../frontend-angular
+      dockerfile: frontend.dockerfile
+    image: task-management-frontend
+    container_name: task-management-frontend
+    environment:
+      - API_URL="https://api.membership.az"
+    ports:
+      - "4200:80"

@@ -15,7 +15,8 @@ export class TaskAddMemberComponent implements OnInit {
   findText: string = "";
   taskId!: number;
   users: UserChoose[] = [];
-  constructor(private taskService: TaskService, private notify: NotifyService) { }
+  constructor(private notify: NotifyService,
+    private taskService: TaskService) { }
 
   ngOnInit() {
   }
@@ -24,7 +25,7 @@ export class TaskAddMemberComponent implements OnInit {
     if (event.state) {
       this.taskId = event.taskId;
       this.taskService.getMembers(this.taskId)
-        .subscribe(response => {
+        .subscribe((response:any) => {
           this.users = response;
           this.addmember.nativeElement.classList.add('open');
           document.body.classList.add('overlay');
@@ -46,12 +47,12 @@ export class TaskAddMemberComponent implements OnInit {
   onChange(user: UserChoose) {
 
     this.taskService.chooseMember(this.taskId, user)
-      .subscribe(response => {
+      .subscribe((response:any) => {
 
         if (user.selected)
           this.notify.success(`${user.name} tapşırıq üzrə təyin edildi`);
         else
-        this.notify.warning(`${user.name} tapşırıqdan azad edildi`);
+          this.notify.warning(`${user.name} tapşırıqdan azad edildi`);
         this.users = response;
       });
   }

@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
     this.accountService.fillInfo();
 
     this.boardService.getAll()
-      .subscribe(response => {
+      .subscribe((response: any) => {
         this.boards = response;
       });
   }
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
     that.task.deadline.setDate(this.task.deadline.getDate() + 1);
     this.task.boardId = id;
 
-    that.accountService.getUsers().subscribe(response => {
+    that.accountService.getUsers().subscribe((response: any) => {
       this.task.users = response;
       that.showCreateNewTaskModal = true;
       document.body.classList.add('overlay');
@@ -107,8 +107,8 @@ export class HomeComponent implements OnInit {
 
   onCloseMemberModal(event: any) {
     this.boardService.getAll()
-    .subscribe(response => {
-      this.boards = response;
-    });
+      .subscribe(response => {
+        this.boards = response;
+      });
   }
 }

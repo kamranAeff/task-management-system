@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter,  Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Task } from 'src/app/models/task';
 import { priorities, TaskPriorityChange } from 'src/app/models/task-priority-change';
 import { statuses, TaskStatusChange } from 'src/app/models/task-status-change';
@@ -14,7 +14,7 @@ export class TaskComponent implements OnInit {
   @Input() task!: Task;
   @Output() addMember: EventEmitter<any> = new EventEmitter();
 
-  constructor(private notify: NotifyService, private taskService: TaskService) { }
+  constructor(private notify: NotifyService,private taskService: TaskService) { }
 
   ngOnInit() {
   }
@@ -25,7 +25,7 @@ export class TaskComponent implements OnInit {
         id: this.task.id,
         status
       } as TaskStatusChange)
-        .subscribe(response => {
+        .subscribe((response:any) => {
           if (response.error) {
             this.notify.error(response.message);
             return;
@@ -42,7 +42,7 @@ export class TaskComponent implements OnInit {
         id: this.task.id,
         priority
       } as TaskPriorityChange)
-        .subscribe(response => {
+        .subscribe((response:any) => {
           if (response.error) {
             this.notify.error(response.message);
             return;
